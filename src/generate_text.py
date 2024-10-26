@@ -1,15 +1,22 @@
-# src/generate_text.py
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+import torch
 
-# Load the fine-tuned model and tokenizer
-model = GPT2LMHeadModel.from_pretrained('./models')
-tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+model.eval()
 
-# Generate text
-input_text = "Your prompt here"
-input_ids = tokenizer.encode(input_text, return_tensors='pt')
+prompt = "The meaning of life is"
 
-output = model.generate(input_ids, max_length=100)
+input_ids = tokenizer.encode(prompt_text, return_tensors="pt")
+
+with torch.no_grad():
+    output = model.generate(
+        input_ids,
+        max_length=100,
+        num_return_sequences=1,
+        no_repeat_ngram_size=2,
+        do_sample=True,
+        top_k=50,
+        top_p=0.95,
+    )
+
 generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
 
-print(generated_text)
+print("Generated Text: ", generated_text)
