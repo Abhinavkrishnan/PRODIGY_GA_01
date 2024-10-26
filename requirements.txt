@@ -5,3 +5,4 @@ Werkzeug==2.0.3
 transformers
 datasets
 tf-keras
+torch
