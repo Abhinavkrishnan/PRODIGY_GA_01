@@ -4,5 +4,5 @@ requests==2.26.0
 Werkzeug==2.0.3
 transformers
 datasets
-tf-keras
 torch
+tensorflow
